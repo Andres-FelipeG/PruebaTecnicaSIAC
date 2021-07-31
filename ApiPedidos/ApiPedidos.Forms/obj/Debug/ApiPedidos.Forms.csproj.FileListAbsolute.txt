@@ -1,0 +1,10 @@
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\bin\Debug\ApiPedidos.Forms.exe.config
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\bin\Debug\ApiPedidos.Forms.exe
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\bin\Debug\ApiPedidos.Forms.pdb
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.csprojAssemblyReference.cache
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.Form1.resources
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.Properties.Resources.resources
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.csproj.GenerateResource.cache
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.exe
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.Forms\obj\Debug\ApiPedidos.Forms.pdb

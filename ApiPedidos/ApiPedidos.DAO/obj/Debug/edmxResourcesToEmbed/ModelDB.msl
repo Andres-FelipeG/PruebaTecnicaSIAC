@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBManagerStoreContainer" CdmEntityContainer="DbConnection">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="DBManager.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenPedido">
+      <EntityTypeMapping TypeName="DBManager.OrdenPedido">
+        <MappingFragment StoreEntitySet="OrdenPedido">
+          <ScalarProperty Name="OrdenPedidoID" ColumnName="OrdenPedidoID" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="DireccionEntrega" ColumnName="DireccionEntrega" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+          <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenPedidoProducto">
+      <EntityTypeMapping TypeName="DBManager.OrdenPedidoProducto">
+        <MappingFragment StoreEntitySet="OrdenPedidoProducto">
+          <ScalarProperty Name="OrdenPedidoProductoID" ColumnName="OrdenPedidoProductoID" />
+          <ScalarProperty Name="OrdenPedidoID" ColumnName="OrdenPedidoID" />
+          <ScalarProperty Name="OrdenProductoID" ColumnName="OrdenProductoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenProducto">
+      <EntityTypeMapping TypeName="DBManager.OrdenProducto">
+        <MappingFragment StoreEntitySet="OrdenProducto">
+          <ScalarProperty Name="OrdenID" ColumnName="OrdenID" />
+          <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+          <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+          <ScalarProperty Name="ValorParcial" ColumnName="ValorParcial" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="DBManager.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

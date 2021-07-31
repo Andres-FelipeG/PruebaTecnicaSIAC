@@ -1,0 +1,30 @@
+<div style="width: 50%; margin-top: 10px;" class="d-flex justify-content-center">
+    <form>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Cliente</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Selecccione..</option>
+                <option value="dato.idCliente" *ngFor="let dato of clientes">
+                    {{dato.nombre}}
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Selecccione..</option>
+                <option value="dato.idProducto" *ngFor="let dato of productos">
+                    {{dato.nombreProducto}}
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="cantidadlbl" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button mat-button color="primary" [routerLink]="['']">Volver</button>
+    </form>
+
+</div>

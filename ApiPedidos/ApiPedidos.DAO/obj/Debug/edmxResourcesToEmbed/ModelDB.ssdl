@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBManager.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ClienteID" />
+    </Key>
+    <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="Identificacion" Type="varchar" MaxLength="255" />
+    <Property Name="Direccion" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="OrdenPedido">
+    <Key>
+      <PropertyRef Name="OrdenPedidoID" />
+    </Key>
+    <Property Name="OrdenPedidoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaRegistro" Type="datetime" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" />
+    <Property Name="DireccionEntrega" Type="varchar" MaxLength="50" />
+    <Property Name="Prioridad" Type="varchar" MaxLength="50" />
+    <Property Name="ValorTotal" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ClienteID" Type="int" />
+  </EntityType>
+  <EntityType Name="OrdenPedidoProducto">
+    <Key>
+      <PropertyRef Name="OrdenPedidoProductoID" />
+    </Key>
+    <Property Name="OrdenPedidoProductoID" Type="int" Nullable="false" />
+    <Property Name="OrdenPedidoID" Type="int" />
+    <Property Name="OrdenProductoID" Type="int" />
+  </EntityType>
+  <EntityType Name="OrdenProducto">
+    <Key>
+      <PropertyRef Name="OrdenID" />
+    </Key>
+    <Property Name="OrdenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductoID" Type="int" />
+    <Property Name="ValorUnitario" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ValorParcial" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="ProductoID" />
+    </Key>
+    <Property Name="ProductoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_OrdenPedido_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ClienteID" />
+      </Principal>
+      <Dependent Role="OrdenPedido">
+        <PropertyRef Name="ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenPedidoProducto_OrdenPedido">
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="0..1" />
+    <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPedido">
+        <PropertyRef Name="OrdenPedidoID" />
+      </Principal>
+      <Dependent Role="OrdenPedidoProducto">
+        <PropertyRef Name="OrdenPedidoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenPedidoProducto_OrdenProducto">
+    <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="0..1" />
+    <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenProducto">
+        <PropertyRef Name="OrdenID" />
+      </Principal>
+      <Dependent Role="OrdenPedidoProducto">
+        <PropertyRef Name="OrdenProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenProducto_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="OrdenProducto">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBManagerStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdenPedido" EntityType="Self.OrdenPedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdenPedidoProducto" EntityType="Self.OrdenPedidoProducto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdenProducto" EntityType="Self.OrdenProducto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_OrdenPedido_Cliente" Association="Self.FK_OrdenPedido_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenPedidoProducto_OrdenPedido" Association="Self.FK_OrdenPedidoProducto_OrdenPedido">
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+      <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenPedidoProducto_OrdenProducto" Association="Self.FK_OrdenPedidoProducto_OrdenProducto">
+      <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+      <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenProducto_Producto" Association="Self.FK_OrdenProducto_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

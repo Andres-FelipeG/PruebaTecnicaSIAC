@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBManager.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="255" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="OrdenPedido">
+          <Key>
+            <PropertyRef Name="OrdenPedidoID" />
+          </Key>
+          <Property Name="OrdenPedidoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionEntrega" Type="varchar" MaxLength="50" />
+          <Property Name="Prioridad" Type="varchar" MaxLength="50" />
+          <Property Name="ValorTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ClienteID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrdenPedidoProducto">
+          <Key>
+            <PropertyRef Name="OrdenPedidoProductoID" />
+          </Key>
+          <Property Name="OrdenPedidoProductoID" Type="int" Nullable="false" />
+          <Property Name="OrdenPedidoID" Type="int" />
+          <Property Name="OrdenProductoID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrdenProducto">
+          <Key>
+            <PropertyRef Name="OrdenID" />
+          </Key>
+          <Property Name="OrdenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoID" Type="int" />
+          <Property Name="ValorUnitario" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ValorParcial" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoID" />
+          </Key>
+          <Property Name="ProductoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_OrdenPedido_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="OrdenPedido">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenPedidoProducto_OrdenPedido">
+          <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="0..1" />
+          <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenPedido">
+              <PropertyRef Name="OrdenPedidoID" />
+            </Principal>
+            <Dependent Role="OrdenPedidoProducto">
+              <PropertyRef Name="OrdenPedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenPedidoProducto_OrdenProducto">
+          <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="0..1" />
+          <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenProducto">
+              <PropertyRef Name="OrdenID" />
+            </Principal>
+            <Dependent Role="OrdenPedidoProducto">
+              <PropertyRef Name="OrdenProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="OrdenProducto">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBManagerStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenPedido" EntityType="Self.OrdenPedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenPedidoProducto" EntityType="Self.OrdenPedidoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenProducto" EntityType="Self.OrdenProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OrdenPedido_Cliente" Association="Self.FK_OrdenPedido_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenPedidoProducto_OrdenPedido" Association="Self.FK_OrdenPedidoProducto_OrdenPedido">
+            <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+            <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenPedidoProducto_OrdenProducto" Association="Self.FK_OrdenPedidoProducto_OrdenProducto">
+            <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+            <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenProducto_Producto" Association="Self.FK_OrdenProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBManager" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Identificacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdenPedido" Relationship="Self.FK_OrdenPedido_Cliente" FromRole="Cliente" ToRole="OrdenPedido" />
+        </EntityType>
+        <EntityType Name="OrdenPedido">
+          <Key>
+            <PropertyRef Name="OrdenPedidoID" />
+          </Key>
+          <Property Name="OrdenPedidoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionEntrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prioridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ClienteID" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_OrdenPedido_Cliente" FromRole="OrdenPedido" ToRole="Cliente" />
+          <NavigationProperty Name="OrdenPedidoProducto" Relationship="Self.FK_OrdenPedidoProducto_OrdenPedido" FromRole="OrdenPedido" ToRole="OrdenPedidoProducto" />
+        </EntityType>
+        <EntityType Name="OrdenPedidoProducto">
+          <Key>
+            <PropertyRef Name="OrdenPedidoProductoID" />
+          </Key>
+          <Property Name="OrdenPedidoProductoID" Type="Int32" Nullable="false" />
+          <Property Name="OrdenPedidoID" Type="Int32" />
+          <Property Name="OrdenProductoID" Type="Int32" />
+          <NavigationProperty Name="OrdenPedido" Relationship="Self.FK_OrdenPedidoProducto_OrdenPedido" FromRole="OrdenPedidoProducto" ToRole="OrdenPedido" />
+          <NavigationProperty Name="OrdenProducto" Relationship="Self.FK_OrdenPedidoProducto_OrdenProducto" FromRole="OrdenPedidoProducto" ToRole="OrdenProducto" />
+        </EntityType>
+        <EntityType Name="OrdenProducto">
+          <Key>
+            <PropertyRef Name="OrdenID" />
+          </Key>
+          <Property Name="OrdenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoID" Type="Int32" />
+          <Property Name="ValorUnitario" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ValorParcial" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="OrdenPedidoProducto" Relationship="Self.FK_OrdenPedidoProducto_OrdenProducto" FromRole="OrdenProducto" ToRole="OrdenPedidoProducto" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_OrdenProducto_Producto" FromRole="OrdenProducto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoID" />
+          </Key>
+          <Property Name="ProductoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdenProducto" Relationship="Self.FK_OrdenProducto_Producto" FromRole="Producto" ToRole="OrdenProducto" />
+        </EntityType>
+        <Association Name="FK_OrdenPedido_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="OrdenPedido">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenPedidoProducto_OrdenPedido">
+          <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="0..1" />
+          <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenPedido">
+              <PropertyRef Name="OrdenPedidoID" />
+            </Principal>
+            <Dependent Role="OrdenPedidoProducto">
+              <PropertyRef Name="OrdenPedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenPedidoProducto_OrdenProducto">
+          <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="0..1" />
+          <End Role="OrdenPedidoProducto" Type="Self.OrdenPedidoProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenProducto">
+              <PropertyRef Name="OrdenID" />
+            </Principal>
+            <Dependent Role="OrdenPedidoProducto">
+              <PropertyRef Name="OrdenProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="OrdenProducto" Type="Self.OrdenProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="OrdenProducto">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="OrdenPedido" EntityType="Self.OrdenPedido" />
+          <EntitySet Name="OrdenPedidoProducto" EntityType="Self.OrdenPedidoProducto" />
+          <EntitySet Name="OrdenProducto" EntityType="Self.OrdenProducto" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <AssociationSet Name="FK_OrdenPedido_Cliente" Association="Self.FK_OrdenPedido_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenPedidoProducto_OrdenPedido" Association="Self.FK_OrdenPedidoProducto_OrdenPedido">
+            <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+            <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenPedidoProducto_OrdenProducto" Association="Self.FK_OrdenPedidoProducto_OrdenProducto">
+            <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+            <End Role="OrdenPedidoProducto" EntitySet="OrdenPedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenProducto_Producto" Association="Self.FK_OrdenProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenProducto" EntitySet="OrdenProducto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBManagerStoreContainer" CdmEntityContainer="DbConnection">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="DBManager.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenPedido">
+            <EntityTypeMapping TypeName="DBManager.OrdenPedido">
+              <MappingFragment StoreEntitySet="OrdenPedido">
+                <ScalarProperty Name="OrdenPedidoID" ColumnName="OrdenPedidoID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="DireccionEntrega" ColumnName="DireccionEntrega" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenPedidoProducto">
+            <EntityTypeMapping TypeName="DBManager.OrdenPedidoProducto">
+              <MappingFragment StoreEntitySet="OrdenPedidoProducto">
+                <ScalarProperty Name="OrdenPedidoProductoID" ColumnName="OrdenPedidoProductoID" />
+                <ScalarProperty Name="OrdenPedidoID" ColumnName="OrdenPedidoID" />
+                <ScalarProperty Name="OrdenProductoID" ColumnName="OrdenProductoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenProducto">
+            <EntityTypeMapping TypeName="DBManager.OrdenProducto">
+              <MappingFragment StoreEntitySet="OrdenProducto">
+                <ScalarProperty Name="OrdenID" ColumnName="OrdenID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="ValorParcial" ColumnName="ValorParcial" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="DBManager.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

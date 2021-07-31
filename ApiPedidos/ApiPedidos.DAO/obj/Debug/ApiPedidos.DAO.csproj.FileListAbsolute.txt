@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\ApiPedidos.DAO.dll.config
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\ApiPedidos.DAO.dll
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\ApiPedidos.DAO.pdb
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\obj\Debug\ApiPedidos.DAO.csprojAssemblyReference.cache
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\obj\Debug\ApiPedidos.DAO.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\obj\Debug\ApiPedidos.DAO.csproj.CopyComplete
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\obj\Debug\ApiPedidos.DAO.dll
+C:\Users\user\source\repos\PruebaTecnicaSIAC\ApiPedidos\ApiPedidos.DAO\obj\Debug\ApiPedidos.DAO.pdb
